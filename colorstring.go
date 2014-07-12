@@ -49,6 +49,9 @@ type Colorize struct {
 	Reset bool
 }
 
+// Color colorizes a string according to the settings setup in the struct.
+//
+// For more details on the syntax, see the top-level Color function.
 func (c *Colorize) Color(v string) string {
 	matches := parseRe.FindAllStringIndex(v, -1)
 	if len(matches) == 0 {
