@@ -60,7 +60,7 @@ func (c *Colorize) Color(v string) string {
 
 	result := new(bytes.Buffer)
 	colored := false
-	m := []int{0,0}
+	m := []int{0, 0}
 	for _, nm := range matches {
 		// Write the text in between this match and the last
 		result.WriteString(v[m[1]:nm[0]])
@@ -147,6 +147,9 @@ func init() {
 		"blink_fast": "6",
 		"invert":     "7",
 		"hidden":     "8",
+
+		// Reset to reset everything to their defaults
+		"reset": "0",
 	}
 
 	def = Colorize{
