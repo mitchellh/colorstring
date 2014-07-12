@@ -20,4 +20,11 @@ $ go get github.com/mitchellh/colorstring
 
 For usage and examples see the [Godoc](http://godoc.org/github.com/mitchellh/colorstring).
 
-The `Decode` function has examples associated with it there.
+Usage is easy enough:
+
+```go
+fmt.Println(colorstring.Color("[blue]Hello [red]World!"))
+```
+
+Additionally, the `Colorize` struct can be used to set options such as
+custom colors, color disabling, etc.
