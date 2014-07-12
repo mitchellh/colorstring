@@ -59,19 +59,11 @@ func (c *Colorize) Color(v string) string {
 	}
 
 	result := new(bytes.Buffer)
-	if matches[0][0] > 0 {
-		if _, err := result.WriteString(v[:matches[0][0]]); err != nil {
-			panic(err)
-		}
-	}
-
 	colored := false
-	var m []int
+	m := []int{0,0}
 	for _, nm := range matches {
 		// Write the text in between this match and the last
-		if len(m) > 0 {
-			result.WriteString(v[m[1]:nm[0]])
-		}
+		result.WriteString(v[m[1]:nm[0]])
 		m = nm
 
 		// If we're disabled, just ignore the color code information
