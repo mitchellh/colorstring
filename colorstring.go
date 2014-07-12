@@ -100,11 +100,61 @@ func (c *Colorize) Color(v string) string {
 }
 
 // DefaultColors are the default colors used when colorizing.
+//
+// If the color is surrounded in underscores, such as "_blue_", then that
+// color will be used for the background color.
 var DefaultColors map[string]string
 
 func init() {
 	DefaultColors = map[string]string{
-		"blue": "34",
+		// Default foreground/background colors
+		"default":   "39",
+		"_default_": "49",
+
+		// Foreground colors
+		"black":         "30",
+		"red":           "31",
+		"green":         "32",
+		"yellow":        "33",
+		"blue":          "34",
+		"magenta":       "35",
+		"cyan":          "36",
+		"light_gray":    "37",
+		"dark_gray":     "90",
+		"light_red":     "91",
+		"light_green":   "92",
+		"light_yellow":  "93",
+		"light_blue":    "94",
+		"light_magenta": "95",
+		"light_cyan":    "96",
+		"white":         "97",
+
+		// Background colors
+		"_black_":         "40",
+		"_red_":           "41",
+		"_green_":         "42",
+		"_yellow_":        "43",
+		"_blue_":          "44",
+		"_magenta_":       "45",
+		"_cyan_":          "46",
+		"_light_gray_":    "47",
+		"_dark_gray_":     "100",
+		"_light_red_":     "101",
+		"_light_green_":   "102",
+		"_light_yellow_":  "103",
+		"_light_blue_":    "104",
+		"_light_magenta_": "105",
+		"_light_cyan_":    "106",
+		"_white_":         "107",
+
+		// Attributes
+		"bold":       "1",
+		"dim":        "2",
+		"underline":  "4",
+		"blink_slow": "5",
+		"blink_fast": "6",
+		"invert":     "7",
+		"hidden":     "8",
 	}
 
 	def = Colorize{
