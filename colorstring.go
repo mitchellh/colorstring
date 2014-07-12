@@ -1,3 +1,5 @@
+// colorstring provides functions for colorizing strings for terminal
+// output.
 package colorstring
 
 import (
@@ -26,6 +28,11 @@ type Colorize struct {
 	// "1;34"
 	Colors map[string]string
 
+	// If true, color attributes will be ignored. This is useful if you're
+	// outputting to a location that doesn't support colors and you just
+	// want the strings returned.
+	Disable bool
+
 	// Reset, if true, will reset the color after each colorization by
 	// adding a reset code at the end.
 	Reset bool
@@ -47,10 +54,16 @@ func (c *Colorize) Color(v string) string {
 	colored := false
 	var m []int
 	for _, nm := range matches {
+		// Write the text in between this match and the last
 		if len(m) > 0 {
 			result.WriteString(v[m[1]:nm[0]])
 		}
 		m = nm
+
+		// If we're disabled, just ignore the color code information
+		if c.Disable {
+			continue
+		}
 
 		var replace string
 		if code, ok := c.Colors[v[m[0]+1:m[1]-1]]; ok {

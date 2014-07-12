@@ -41,6 +41,22 @@ func TestColor(t *testing.T) {
 	}
 }
 
+func TestColorizeColor_disable(t *testing.T) {
+	c := def
+	c.Disable = true
+
+	input := "[blue]foo"
+	output := "foo"
+	actual := c.Color(input)
+	if actual != output {
+		t.Errorf(
+			"Input: %#v\n\nOutput: %#v\n\nExpected: %#v",
+			input,
+			actual,
+			output)
+	}
+}
+
 func TestColorizeColor_noReset(t *testing.T) {
 	c := def
 	c.Reset = false
