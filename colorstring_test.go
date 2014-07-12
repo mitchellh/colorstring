@@ -15,12 +15,12 @@ func TestColor(t *testing.T) {
 
 		{
 			Input:  "[blue]foo",
-			Output: "\033[0;34mfoo\033[0m",
+			Output: "\033[34mfoo\033[0m",
 		},
 
 		{
 			Input:  "foo[blue]foo",
-			Output: "foo\033[0;34mfoo\033[0m",
+			Output: "foo\033[34mfoo\033[0m",
 		},
 
 		{
@@ -46,7 +46,7 @@ func TestColorizeColor_noReset(t *testing.T) {
 	c.Reset = false
 
 	input := "[blue]foo"
-	output := "\033[0;34mfoo"
+	output := "\033[34mfoo"
 	actual := c.Color(input)
 	if actual != output {
 		t.Errorf(

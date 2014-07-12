@@ -20,8 +20,11 @@ func Color(v string) string {
 // only interested in the defaults, just use the top Color function directly,
 // which creates a default Colorize.
 type Colorize struct {
-	// Colors maps a color string to the integer code for that color.
-	Colors map[string]int
+	// Colors maps a color string to the code for that color. The code
+	// is a string so that you can use more complex colors to set foreground,
+	// background, attributes, etc. For example, "boldblue" might be
+	// "1;34"
+	Colors map[string]string
 
 	// Reset, if true, will reset the color after each colorization by
 	// adding a reset code at the end.
@@ -52,7 +55,7 @@ func (c *Colorize) Color(v string) string {
 		var replace string
 		if code, ok := c.Colors[v[m[0]+1:m[1]-1]]; ok {
 			colored = true
-			replace = fmt.Sprintf("\033[0;%dm", code)
+			replace = fmt.Sprintf("\033[%sm", code)
 		} else {
 			replace = v[m[0]:m[1]]
 		}
@@ -70,11 +73,11 @@ func (c *Colorize) Color(v string) string {
 }
 
 // DefaultColors are the default colors used when colorizing.
-var DefaultColors map[string]int
+var DefaultColors map[string]string
 
 func init() {
-	DefaultColors = map[string]int{
-		"blue": 34,
+	DefaultColors = map[string]string{
+		"blue": "34",
 	}
 
 	def = Colorize{
