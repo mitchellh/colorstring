@@ -10,7 +10,18 @@ import (
 
 // Color colorizes your strings using the default settings.
 //
-// If you want to customize, use the Colorize struct.
+// Strings given to Color should use the syntax `[color]` to specify the
+// color for text following. For example: `[blue]Hello` will return "Hello"
+// in blue. See DefaultColors for all the supported colors and attributes.
+//
+// If an unrecognized color is given, it is ignored and assumed to be part
+// of the string. For example: `[hi]world` will result in "[hi]world".
+//
+// A color reset is appended to the end of every string. This will reset
+// the color of following strings when you output this text to the same
+// terminal session.
+//
+// If you want to customize any of this behavior, use the Colorize struct.
 func Color(v string) string {
 	return def.Color(v)
 }
