@@ -1,4 +1,4 @@
-# colorstring
+# colorstring [![Build Status](https://travis-ci.org/cloudson/colorstring.svg)](https://travis-ci.org/cloudson/colorstring)
 
 colorstring is a [Go](http://www.golang.org) library for outputting colored
 strings to a console using a simple inline syntax in your string to specify
