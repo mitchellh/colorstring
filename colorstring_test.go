@@ -27,6 +27,22 @@ func TestColor(t *testing.T) {
 			Input:  "foo[what]foo",
 			Output: "foo[what]foo",
 		},
+		{
+			Input: "foo[_blue_]foo",
+			Output: "foo\033[44mfoo\033[0m",
+		},
+		{
+			Input: "foo[bold]foo",
+			Output: "foo\033[1mfoo\033[0m",
+		},
+		{
+			Input: "[blue]foo[bold]bar",
+			Output: "\033[34mfoo\033[1mbar\033[0m",
+		},
+		{
+			Input: "[underline]foo[reset]bar",
+			Output: "\033[4mfoo\033[0mbar\033[0m",
+		},
 	}
 
 	for _, tc := range cases {
