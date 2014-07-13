@@ -153,6 +153,28 @@ func init() {
 		"reset_bold": "21",
 	}
 
+	// 256 color support.
+	// First, the 216 color-cube colors.
+	for r := 0; r < 6; r += 1 {
+		for g := 0; g < 6; g += 1 {
+			for b := 0; b < 6; b += 1 {
+				code := (r + g*6 + b*6*6) + 16
+				// Foreground
+				DefaultColors[fmt.Sprintf("%d%d%d", r, g, b)] = fmt.Sprintf("38;5;%d", code)
+				// Background
+				DefaultColors[fmt.Sprintf("_%d%d%d_", r, g, b)] = fmt.Sprintf("48;5;%d", code)
+			}
+		}
+	}
+
+	// Grayscale
+	for g := 0; g < 16; g += 1 {
+		// Foreground
+		DefaultColors[fmt.Sprintf("gray%d", g)] = fmt.Sprintf("38;5;%d", g+232)
+		// Background
+		DefaultColors[fmt.Sprintf("_gray%d_", g)] = fmt.Sprintf("48;5;%d", g+232)
+	}
+
 	def = Colorize{
 		Colors: DefaultColors,
 		Reset:  true,
