@@ -149,7 +149,8 @@ func init() {
 		"hidden":     "8",
 
 		// Reset to reset everything to their defaults
-		"reset": "0",
+		"reset":      "0",
+		"reset_bold": "21",
 	}
 
 	def = Colorize{
