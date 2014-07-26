@@ -66,15 +66,13 @@ func (c *Colorize) Color(v string) string {
 		result.WriteString(v[m[1]:nm[0]])
 		m = nm
 
-		// If we're disabled, just ignore the color code information
-		if c.Disable {
-			continue
-		}
-
 		var replace string
 		if code, ok := c.Colors[v[m[0]+1:m[1]-1]]; ok {
 			colored = true
-			replace = fmt.Sprintf("\033[%sm", code)
+
+			if !c.Disable {
+				replace = fmt.Sprintf("\033[%sm", code)
+			}
 		} else {
 			replace = v[m[0]:m[1]]
 		}
@@ -83,7 +81,7 @@ func (c *Colorize) Color(v string) string {
 	}
 	result.WriteString(v[m[1]:])
 
-	if colored && c.Reset {
+	if colored && c.Reset && !c.Disable {
 		// Write the clear byte at the end
 		result.WriteString("\033[0m")
 	}

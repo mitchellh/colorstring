@@ -61,15 +61,29 @@ func TestColorizeColor_disable(t *testing.T) {
 	c := def
 	c.Disable = true
 
-	input := "[blue]foo"
-	output := "foo"
-	actual := c.Color(input)
-	if actual != output {
-		t.Errorf(
-			"Input: %#v\n\nOutput: %#v\n\nExpected: %#v",
-			input,
-			actual,
-			output)
+	cases := []struct {
+		Input, Output string
+	}{
+		{
+			"[blue]foo",
+			"foo",
+		},
+
+		{
+			"[foo]bar",
+			"[foo]bar",
+		},
+	}
+
+	for _, tc := range cases {
+		actual := c.Color(tc.Input)
+		if actual != tc.Output {
+			t.Errorf(
+				"Input: %#v\n\nOutput: %#v\n\nExpected: %#v",
+				tc.Input,
+				actual,
+				tc.Output)
+		}
 	}
 }
 
