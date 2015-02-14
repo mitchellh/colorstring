@@ -67,8 +67,13 @@ func (c *Colorize) Color(v string) string {
 		m = nm
 
 		var replace string
-		if code, ok := c.Colors[v[m[0]+1:m[1]-1]]; ok {
-			colored = true
+		color := v[m[0]+1 : m[1]-1]
+		if code, ok := c.Colors[color]; ok {
+			if color == "reset" {
+				colored = false
+			} else {
+				colored = true
+			}
 
 			if !c.Disable {
 				replace = fmt.Sprintf("\033[%sm", code)
