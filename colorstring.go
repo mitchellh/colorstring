@@ -5,6 +5,7 @@ package colorstring
 import (
 	"bytes"
 	"fmt"
+	"io"
 	"regexp"
 )
 
@@ -159,3 +160,17 @@ func init() {
 
 var def Colorize
 var parseRe = regexp.MustCompile(`(?i)\[[a-z0-9_-]+\]`)
+
+// Printf formats according to a format specifier and writes to standard output
+// with support for color codes. It returns the number of bytes written and any
+// write error encountered.
+func Printf(format string, a ...interface{}) (n int, err error) {
+	return fmt.Printf(Color(format), a...)
+}
+
+// Fprintf formats according to a format specifier and writes to w with support
+// for color codes. It returns the number of bytes written and any write error
+// encountered.
+func Fprintf(w io.Writer, format string, a ...interface{}) (n int, err error) {
+	return fmt.Fprintf(w, Color(format), a...)
+}
