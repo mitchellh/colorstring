@@ -23,7 +23,7 @@ For usage and examples see the [Godoc](http://godoc.org/github.com/mitchellh/col
 Usage is easy enough:
 
 ```go
-fmt.Println(colorstring.Color("[blue]Hello [red]World!"))
+colorstring.Println("[blue]Hello [red]World!")
 ```
 
 Additionally, the `Colorize` struct can be used to set options such as
