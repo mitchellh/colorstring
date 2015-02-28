@@ -1,6 +1,7 @@
 package colorstring
 
 import (
+	"os"
 	"testing"
 )
 
@@ -100,5 +101,48 @@ func TestColorizeColor_noReset(t *testing.T) {
 			input,
 			actual,
 			output)
+	}
+}
+
+func TestConvenienceWrappers(t *testing.T) {
+	var length int
+	printInput := "[bold]Print:\t\t[default][red]R[green]G[blue]B[cyan]C[magenta]M[yellow]Y\n"
+	printlnInput := "[bold]Println:\t[default][red]R[green]G[blue]B[cyan]C[magenta]M[yellow]Y"
+	printfInput := "[bold]Printf:\t\t[default][red]R[green]G[blue]B[cyan]C[magenta]M[yellow]Y\n"
+	fprintInput := "[bold]Fprint:\t\t[default][red]R[green]G[blue]B[cyan]C[magenta]M[yellow]Y\n"
+	fprintlnInput := "[bold]Fprintln:\t[default][red]R[green]G[blue]B[cyan]C[magenta]M[yellow]Y"
+	fprintfInput := "[bold]Fprintf:\t[default][red]R[green]G[blue]B[cyan]C[magenta]M[yellow]Y\n"
+
+	// colorstring.Print
+	length, _ = Print(printInput)
+	assertOutputLength(t, printInput, 58, length)
+
+	// colorstring.Println
+	length, _ = Println(printlnInput)
+	assertOutputLength(t, printlnInput, 59, length)
+
+	// colorstring.Printf
+	length, _ = Printf(printfInput)
+	assertOutputLength(t, printfInput, 59, length)
+
+	// colorstring.Fprint
+	length, _ = Fprint(os.Stdout, fprintInput)
+	assertOutputLength(t, fprintInput, 59, length)
+
+	// colorstring.Fprintln
+	length, _ = Fprintln(os.Stdout, fprintlnInput)
+	assertOutputLength(t, fprintlnInput, 60, length)
+
+	// colorstring.Fprintf
+	length, _ = Fprintf(os.Stdout, fprintfInput)
+	assertOutputLength(t, fprintfInput, 59, length)
+}
+
+func assertOutputLength(t *testing.T, input string, expectedLength int, actualLength int) {
+	if actualLength != expectedLength {
+		t.Errorf("Input: %#v\n\n Output length: %d\n\n Expected: %d",
+			input,
+			actualLength,
+			expectedLength)
 	}
 }
