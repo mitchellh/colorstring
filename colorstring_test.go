@@ -42,7 +42,7 @@ func TestColor(t *testing.T) {
 		},
 		{
 			Input:  "[underline]foo[reset]bar",
-			Output: "\033[4mfoo\033[0mbar\033[0m",
+			Output: "\033[4mfoo\033[0mbar",
 		},
 	}
 
