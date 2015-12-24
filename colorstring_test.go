@@ -1,7 +1,6 @@
 package colorstring
 
 import (
-	"os"
 	"testing"
 )
 
@@ -162,16 +161,18 @@ func TestConvenienceWrappers(t *testing.T) {
 	length, _ = Printf(printfInput)
 	assertOutputLength(t, printfInput, 59, length)
 
+	stdout := DefaultOutput
+
 	// colorstring.Fprint
-	length, _ = Fprint(os.Stdout, fprintInput)
+	length, _ = Fprint(stdout, fprintInput)
 	assertOutputLength(t, fprintInput, 59, length)
 
 	// colorstring.Fprintln
-	length, _ = Fprintln(os.Stdout, fprintlnInput)
+	length, _ = Fprintln(stdout, fprintlnInput)
 	assertOutputLength(t, fprintlnInput, 60, length)
 
 	// colorstring.Fprintf
-	length, _ = Fprintf(os.Stdout, fprintfInput)
+	length, _ = Fprintf(stdout, fprintfInput)
 	assertOutputLength(t, fprintfInput, 59, length)
 }
 

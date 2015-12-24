@@ -8,6 +8,8 @@ import (
 	"io"
 	"regexp"
 	"strings"
+
+	"github.com/mattn/go-colorable"
 )
 
 // Color colorizes your strings using the default settings.
@@ -115,6 +117,9 @@ func (c *Colorize) ColorPrefix(v string) string {
 // color will be used for the background color.
 var DefaultColors map[string]string
 
+// DefaultOutput are the default writer used when print.
+var DefaultOutput = colorable.NewColorableStdout()
+
 func init() {
 	DefaultColors = map[string]string{
 		// Default foreground/background colors
@@ -189,7 +194,7 @@ var prefixRe = regexp.MustCompile(`^(?i)(` + parseReRaw + `)+`)
 // operands when neither is a string. It returns the number of bytes written
 // and any write error encountered.
 func Print(a string) (n int, err error) {
-	return fmt.Print(Color(a))
+	return fmt.Fprint(DefaultOutput, Color(a))
 }
 
 // Println is a convenience wrapper for fmt.Println with support for color
@@ -200,7 +205,7 @@ func Print(a string) (n int, err error) {
 // between operands and a newline is appended. It returns the number of bytes
 // written and any write error encountered.
 func Println(a string) (n int, err error) {
-	return fmt.Println(Color(a))
+	return fmt.Fprintln(DefaultOutput, Color(a))
 }
 
 // Printf is a convenience wrapper for fmt.Printf with support for color codes.
@@ -209,7 +214,7 @@ func Println(a string) (n int, err error) {
 // with support for color codes. It returns the number of bytes written and any
 // write error encountered.
 func Printf(format string, a ...interface{}) (n int, err error) {
-	return fmt.Printf(Color(format), a...)
+	return fmt.Fprintf(DefaultOutput, Color(format), a...)
 }
 
 // Fprint is a convenience wrapper for fmt.Fprint with support for color codes.
