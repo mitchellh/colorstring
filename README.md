@@ -28,3 +28,12 @@ colorstring.Println("[blue]Hello [red]World!")
 
 Additionally, the `Colorize` struct can be used to set options such as
 custom colors, color disabling, etc.
+
+## 256 color terminal support
+
+Many modern terminals support 256 colors, so this library offers this with two special kinds of colors:
+
+* `[rgb]` where each letter is a number 0 to 5; 0 being darkest and 5 being brightest.
+* `[grayN]` where N is a number 0 to 15; 0 being darkest (black) and 15 being brightest.
+* Background colors are also supported like the rest of the library `[_rgb_]`
+  would be background color for that rgb level.
