@@ -26,5 +26,11 @@ Usage is easy enough:
 colorstring.Println("[blue]Hello [red]World!")
 ```
 
+See in console by running example:
+
+```
+go run examples/main.go 
+```
+
 Additionally, the `Colorize` struct can be used to set options such as
 custom colors, color disabling, etc.
